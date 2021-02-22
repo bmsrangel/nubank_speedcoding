@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nubank_interface_clone/app/modules/home/models/icon_model.dart';
+
+import '../models/icon_model.dart';
 
 class BottomCardWidget extends StatelessWidget {
   const BottomCardWidget({

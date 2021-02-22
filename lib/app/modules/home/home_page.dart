@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:nubank_interface_clone/app/modules/home/home_controller.dart';
-import 'package:nubank_interface_clone/app/modules/home/models/icon_model.dart';
-import 'package:nubank_interface_clone/app/modules/home/widgets/body_card_widget.dart';
 
+import 'home_controller.dart';
+import 'models/icon_model.dart';
 import 'widgets/action_button_widget.dart';
+import 'widgets/body_card_widget.dart';
 import 'widgets/bottom_card_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +31,39 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       )),
+    );
+  }
+
+  Row _buildHeader() {
+    return Row(
+      children: [
+        Text(
+          'Olá, Bruno',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Expanded(
+          child: const SizedBox.shrink(),
+        ),
+        ValueListenableBuilder(
+          valueListenable: controller.showContentNotifier,
+          builder: (_, value, __) => ActionButtonWidget(
+            iconData: value
+                ? Icons.visibility_off_outlined
+                : Icons.visibility_outlined,
+            iconButtonBackgroundColor: secondaryColor,
+            onPressed: controller.showHideContent,
+          ),
+        ),
+        const SizedBox(width: 10.0),
+        ActionButtonWidget(
+          iconData: Icons.settings_outlined,
+          iconButtonBackgroundColor: secondaryColor,
+        ),
+      ],
     );
   }
 
@@ -162,39 +195,6 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-    );
-  }
-
-  Row _buildHeader() {
-    return Row(
-      children: [
-        Text(
-          'Olá, Bruno',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Expanded(
-          child: const SizedBox.shrink(),
-        ),
-        ValueListenableBuilder(
-          valueListenable: controller.showContentNotifier,
-          builder: (_, value, __) => ActionButtonWidget(
-            iconData: value
-                ? Icons.visibility_off_outlined
-                : Icons.visibility_outlined,
-            iconButtonBackgroundColor: secondaryColor,
-            onPressed: controller.showHideContent,
-          ),
-        ),
-        const SizedBox(width: 10.0),
-        ActionButtonWidget(
-          iconData: Icons.settings_outlined,
-          iconButtonBackgroundColor: secondaryColor,
-        ),
-      ],
     );
   }
 }
